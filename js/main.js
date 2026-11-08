@@ -8,22 +8,16 @@ const CONFIG = {
 
   // Google 表單網址（還沒做好就留空，按鈕會提示「準備中」）
   forms: {
-    fund: "",     // 集資表單
-    message: "",  // 留言表單（內容可挑選貼到下方留言牆）
+    fund: "https://forms.gle/Y4ScsrTdaMjVE53x9", // 集資表單
+    message: "https://forms.gle/6BLXzoJU3yB9bB5r6", // 留言表單
     ticketN: "",  // N票 售票網址
     ticketS: "",  // S票 售票網址
   },
 
-  // 留言牆內容（之後從表單回覆挑選貼上）
-  messages: [
-    // ⚠ 以下為範例留言，上線前請換成真實內容或刪除
-    { name: "範例血眷 A", text: "生日快樂！第一次看到湊的舞台就被咬了，從此再也逃不掉 🦇" },
-    { name: "範例血眷 B", text: "願吸血鬼大人新的一歲也永遠閃耀，12/11 現場見！" },
-    { name: "範例血眷 C", text: "湊的笑容是我每天的動力，這份契約會一直延續下去。" },
-    { name: "範例血眷 D", text: "雖然沒辦法到現場，但會在遠方一起點亮血月 🌹" },
-    { name: "範例血眷 E", text: "謝謝湊一直這麼努力，Happy Birthday!!" },
-    { name: "範例血眷 F", text: "被湊吸走的不只是血，還有我的錢包和心 💸" },
-  ],
+  // 留言牆資料來源：試算表「公開」工作表「發布到網路」的 CSV 網址
+  // （格式像 https://docs.google.com/spreadsheets/d/e/2PACX-.../pub?gid=...&single=true&output=csv）
+  // 第一列是標題，A 欄＝稱呼、B 欄＝留言。留空時留言牆顯示「還沒有留言」
+  messagesCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRAe7Zpk5N7CZukl37BYCwxv7PtKUHEcIEsmsXQf2cSZJnsjMYx_izz-vnAv7H9b7kRsfhMLfKmKqpI/pub?gid=685707350&single=true&output=csv",
 };
 
 /* ---------- 載入動畫 ---------- */
@@ -154,16 +148,72 @@ document.querySelectorAll(".js-form-link").forEach((btn) => {
 /* ---------- 留言牆 ---------- */
 (function messageWall() {
   const wall = document.getElementById("message-wall");
-  CONFIG.messages.forEach(({ name, text }) => {
-    const card = document.createElement("blockquote");
-    card.className = "message reveal";
+
+  function notice(text) {
+    wall.innerHTML = "";
     const p = document.createElement("p");
+    p.className = "messages__notice";
     p.textContent = text;
-    const cite = document.createElement("cite");
-    cite.textContent = "— " + name;
-    card.append(p, cite);
-    wall.appendChild(card);
-  });
+    wall.appendChild(p);
+  }
+
+  // 解析 CSV（支援引號、逗號、換行都在留言內的情況）
+  function parseCsv(str) {
+    const rows = [];
+    let row = [], field = "", quoted = false;
+    for (let i = 0; i < str.length; i++) {
+      const c = str[i];
+      if (quoted) {
+        if (c === '"' && str[i + 1] === '"') { field += '"'; i++; }
+        else if (c === '"') quoted = false;
+        else field += c;
+      } else if (c === '"') quoted = true;
+      else if (c === ",") { row.push(field); field = ""; }
+      else if (c === "\n" || c === "\r") {
+        if (c === "\r" && str[i + 1] === "\n") i++;
+        row.push(field); rows.push(row); row = []; field = "";
+      } else field += c;
+    }
+    if (field || row.length) { row.push(field); rows.push(row); }
+    return rows;
+  }
+
+  function render(list) {
+    if (!list.length) return notice("還沒有留言，成為第一個留言的血眷吧 🦇");
+    wall.innerHTML = "";
+    list.forEach(({ name, text }, i) => {
+      const card = document.createElement("blockquote");
+      card.className = "message";
+      card.style.animationDelay = Math.min(i, 12) * 0.06 + "s";
+      const p = document.createElement("p");
+      p.textContent = text;          // 用 textContent，留言內容不會被當成程式執行
+      const cite = document.createElement("cite");
+      cite.textContent = "— " + (name || "匿名血眷");
+      card.append(p, cite);
+      wall.appendChild(card);
+    });
+  }
+
+  if (!CONFIG.messagesCsv) return render([]);
+
+  notice("讀取留言中…");
+  const url = CONFIG.messagesCsv + (CONFIG.messagesCsv.includes("?") ? "&" : "?") + "t=" + Date.now();
+  fetch(url)
+    .then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); })
+    .then((csv) => {
+      const list = parseCsv(csv)
+        .slice(1) // 跳過標題列
+        .map(([name = "", text = ""]) => ({ name: name.trim(), text: text.trim() }))
+        .filter((m) => m.text);
+      render(list);
+    })
+    .catch(() =>
+      notice(
+        location.protocol === "file:"
+          ? "（本機預覽讀不到留言，上傳到 GitHub 後就會正常顯示）"
+          : "留言暫時無法載入，請稍後再試。"
+      )
+    );
 })();
 
 /* ---------- 捲動進場動畫 ---------- */

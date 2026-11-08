@@ -449,6 +449,13 @@ body.is-loading .hero__inner > * { opacity: 0; transform: translateY(24px); }
   display: block; margin-top: 10px; font-style: normal; font-size: .85rem;
   color: var(--color-blood); text-align: right; font-weight: 600;
 }
+.message { animation: message-in .6s ease both; }
+.message p { white-space: pre-line; } /* 保留留言裡的換行 */
+@keyframes message-in { from { opacity: 0; transform: translateY(16px); } }
+.messages__notice {
+  column-span: all; text-align: center; color: var(--color-text-sub);
+  padding: 32px 16px; border: 1px dashed rgba(201, 162, 74, .3);
+}
 
 /* ---------- Q&A ---------- */
 .faq {
