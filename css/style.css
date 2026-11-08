@@ -343,7 +343,7 @@ body.is-loading .hero__inner > * { opacity: 0; transform: translateY(24px); }
 /* ---------- 應援內容 ---------- */
 .cards {
   display: grid; gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
 }
 .card {
   position: relative;
