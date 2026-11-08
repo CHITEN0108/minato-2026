@@ -23,10 +23,32 @@
   <!-- ===== 載入動畫 ===== -->
   <div class="loader" id="loader" aria-hidden="true">
     <div class="loader__inner">
-      <svg class="loader__bat" viewBox="0 0 100 44" fill="currentColor"><path d="M50 14c-2-5-5-6-7-3-5-8-18-11-30-6 7 2 9 8 7 14 6-4 13-2 15 4 4-4 10-2 12 4l3 9 3-9c2-6 8-8 12-4 2-6 9-8 15-4-2-6 0-12 7-14-12-5-25-2-30 6-2-3-5-2-7 3z"/></svg>
-      <p class="loader__title" data-text="鬼塚湊">鬼塚湊</p>
+      <!-- 血滴：外框金線，裡面的血液由下往上注滿 -->
+      <span class="loader__stream"></span>
+      <svg class="loader__drop" viewBox="0 0 100 140">
+        <defs>
+          <clipPath id="drop-clip">
+            <path d="M50 6C50 6 14 58 14 92a36 36 0 0 0 72 0C86 58 50 6 50 6Z"/>
+          </clipPath>
+          <linearGradient id="blood-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e0263f"/>
+            <stop offset="1" stop-color="#5c0510"/>
+          </linearGradient>
+        </defs>
+        <g clip-path="url(#drop-clip)">
+          <rect width="100" height="140" fill="#12070a"/>
+          <g class="loader__fill">
+            <path class="loader__wave loader__wave--back" d="M0 6Q12.5 0 25 6T50 6T75 6T100 6T125 6T150 6T175 6T200 6V160H0Z"/>
+            <path class="loader__wave" d="M0 6Q12.5 0 25 6T50 6T75 6T100 6T125 6T150 6T175 6T200 6V160H0Z"/>
+          </g>
+        </g>
+        <path d="M50 6C50 6 14 58 14 92a36 36 0 0 0 72 0C86 58 50 6 50 6Z" fill="none" stroke="#c9a24a" stroke-width="1.5"/>
+        <!-- 反光 -->
+        <path d="M30 86c0-12 6-24 12-34" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <p class="loader__title">鬼塚湊</p>
       <p class="loader__sub">2026生誕祭</p>
-      <div class="loader__bar"><span></span></div>
+      <p class="loader__percent" id="loader-percent">0%</p>
     </div>
   </div>
 
@@ -38,8 +60,8 @@
     </button>
     <nav class="nav__menu">
       <a href="#about">企劃介紹</a>
+      <a href="#event">活動資訊</a>
       <a href="#support">應援內容</a>
-      <a href="#schedule">時程</a>
       <a href="#join">參加方式</a>
       <a href="#messages">留言牆</a>
       <a href="#faq">Q&amp;A</a>
@@ -100,8 +122,55 @@
     </div>
   </section>
 
+  <!-- ===== 當天活動資訊 ===== -->
+  <section class="section section--alt" id="event">
+    <div class="container">
+      <h2 class="section__title"><span>The Night</span>夜宴當日</h2>
+      <div class="event">
+
+        <!-- 基本資訊：把「待公布」換成實際內容 -->
+        <dl class="event__info">
+          <div>
+            <dt>日期</dt>
+            <dd>2026.12.11（五）</dd>
+          </div>
+          <div>
+            <dt>會場</dt>
+            <dd>待公布</dd>
+          </div>
+          <div>
+            <dt>時間</dt>
+            <dd>OPEN 待公布 ／ START 待公布</dd>
+          </div>
+          <div>
+            <dt>票種</dt>
+            <dd>N票・S票（詳見 <a href="#join">購票</a>）</dd>
+          </div>
+          <div>
+            <dt>出演</dt>
+            <dd>待公布</dd>
+          </div>
+        </dl>
+
+        <!-- 演出時間表：一列一個節目，複製 <li> 增加 -->
+        <div class="event__timetable">
+          <h3>Timetable</h3>
+          <ol>
+            <li><time>--:--</time><span>演出時間表 待公布</span></li>
+            <!--
+            <li><time>18:30</time><span>開場</span></li>
+            <li><time>19:00</time><span>鬼塚湊 生誕 LIVE</span></li>
+            <li><time>20:30</time><span>特典會</span></li>
+            -->
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ===== 應援內容 ===== -->
-  <section class="section section--alt" id="support">
+  <section class="section" id="support">
     <div class="container">
       <h2 class="section__title"><span>Offerings</span>獻給湊的祭品</h2>
       <div class="cards">
@@ -134,27 +203,6 @@
     </div>
   </section>
 
-  <!-- ===== 時程 ===== -->
-  <section class="section" id="schedule">
-    <div class="container">
-      <h2 class="section__title"><span>Chronicle</span>夜宴時程</h2>
-      <ol class="timeline">
-        <li class="timeline__item" data-date="2026-11-10">
-          <time>11.10</time>
-          <div><h3>邀請函寄出・開始募集</h3><p>集資表單開放填寫。</p></div>
-        </li>
-        <li class="timeline__item" data-date="2026-11-30">
-          <time>11.30</time>
-          <div><h3>集資截止</h3><p>花籃、小卡、立牌、佈景與蛋糕開始籌備。</p></div>
-        </li>
-        <li class="timeline__item" data-date="2026-12-11">
-          <time>12.11</time>
-          <div><h3>血月之夜・生誕當日 🦇</h3><p>古堡佈景登場，花籃與蛋糕獻給湊。</p></div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
   <!-- ===== 參加方式 ===== -->
   <section class="section section--alt" id="join">
     <div class="container">
@@ -184,7 +232,7 @@
   <section class="section" id="messages">
     <div class="container">
       <h2 class="section__title"><span>Letters</span>血眷們的祝福</h2>
-      <p class="section__lead">寫給湊的話（節錄）</p>
+      <p class="section__lead">想跟湊大人說的話</p>
       <div class="messages" id="message-wall"></div>
     </div>
   </section>
@@ -195,15 +243,11 @@
       <h2 class="section__title"><span>Q &amp; A</span>常見問題</h2>
       <details class="faq">
         <summary>沒有去現場也可以參加嗎？</summary>
-        <p>可以！集資可以線上參加，也歡迎透過留言表單寫下祝福，精選留言會刊登在留言牆上。</p>
+        <p>可以！集資可以線上參加，也歡迎透過留言表單寫下祝福。</p>
       </details>
       <details class="faq">
         <summary>集資金額有限制嗎？</summary>
-        <p>沒有限制，心意最重要。集資明細會在活動結束後公開。</p>
-      </details>
-      <details class="faq">
-        <summary>當天有服裝規定嗎？</summary>
-        <p>沒有強制規定，但歡迎穿黑色或深紅色系服裝，一起營造吸血鬼之夜的氣氛！</p>
+        <p>沒有限制，心意最重要。但請以百為單位，方便後續結算。</p>
       </details>
       <details class="faq">
         <summary>有問題要聯絡誰？</summary>

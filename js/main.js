@@ -34,6 +34,16 @@ const CONFIG = {
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const start = performance.now();
 
+  // 百分比數字跟著血液上升（與 CSS 的 2 秒注滿動畫同步）
+  const pct = document.getElementById("loader-percent");
+  const FILL_DELAY = 200, FILL_TIME = 2000;
+  (function count() {
+    const t = Math.min(1, Math.max(0, (performance.now() - start - FILL_DELAY) / FILL_TIME));
+    const eased = t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    if (pct) pct.textContent = Math.round(eased * 100) + "%";
+    if (t < 1) requestAnimationFrame(count);
+  })();
+
   function finish() {
     const wait = reduced ? 0 : Math.max(0, MIN_SHOW - (performance.now() - start));
     setTimeout(() => {
@@ -127,19 +137,6 @@ const CONFIG = {
   }
 })();
 
-/* ---------- 時程：自動標示已過 / 進行中 ---------- */
-(function timeline() {
-  const items = [...document.querySelectorAll(".timeline__item")];
-  const now = Date.now();
-  let current = null;
-  items.forEach((item) => {
-    if (new Date(item.dataset.date + "T00:00:00+08:00").getTime() <= now) {
-      item.classList.add("is-past");
-      current = item;
-    }
-  });
-  if (current) current.classList.add("is-current");
-})();
 
 /* ---------- 表單按鈕 ---------- */
 document.querySelectorAll(".js-form-link").forEach((btn) => {
@@ -172,7 +169,7 @@ document.querySelectorAll(".js-form-link").forEach((btn) => {
 /* ---------- 捲動進場動畫 ---------- */
 (function reveal() {
   document
-    .querySelectorAll(".section__title, .about, .card, .timeline__item, .join__step, .faq")
+    .querySelectorAll(".section__title, .about, .card, .event__info, .event__timetable, .join__step, .faq")
     .forEach((el) => el.classList.add("reveal"));
 
   const io = new IntersectionObserver(

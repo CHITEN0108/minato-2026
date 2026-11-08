@@ -62,45 +62,50 @@ body.is-loading { overflow: hidden; }
 
 .loader__inner { text-align: center; transition: opacity .5s, transform .5s; }
 
-.loader__bat {
-  width: 70px; margin: 0 auto 18px; color: var(--color-blood-light);
-  filter: drop-shadow(0 0 10px rgba(212, 33, 61, .8));
-  animation: bat-flap .22s ease-in-out infinite alternate, loader-hover 1.6s ease-in-out infinite alternate;
+/* 血滴本體 */
+.loader__inner { position: relative; }
+.loader__drop {
+  display: block; width: clamp(90px, 22vw, 120px); margin: 0 auto 20px; overflow: visible;
+  filter: drop-shadow(0 0 18px rgba(212, 33, 61, .45));
 }
-@keyframes loader-hover { from { translate: 0 -6px; } to { translate: 0 6px; } }
+/* 注入用的細血柱，從上方流進血滴尖端 */
+.loader__stream {
+  position: absolute; left: 50%; top: -60px; width: 2px; height: 66px;
+  margin-left: -1px; border-radius: 2px;
+  background: linear-gradient(180deg, transparent, var(--color-blood-light));
+  transform-origin: top; transform: scaleY(0);
+  animation: stream 2.1s ease-in-out forwards;
+}
+@keyframes stream {
+  0%   { transform: scaleY(0); opacity: 1; }
+  12%  { transform: scaleY(1); }
+  85%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
 
-/* 金色空心字，被血從下往上染紅 */
+/* 血液液面：由下往上升（SVG 座標，140 = 空，0 = 滿） */
+.loader__fill {
+  transform: translateY(140px);
+  animation: blood-rise 2s cubic-bezier(.45, 0, .35, 1) .2s forwards;
+}
+@keyframes blood-rise { to { transform: translateY(-4px); } }
+
+/* 液面波浪左右流動 */
+.loader__wave { fill: url(#blood-grad); animation: wave 1.2s linear infinite; }
+.loader__wave--back { fill: #8b0a1a; opacity: .6; animation-duration: 1.9s; animation-direction: reverse; translate: 0 -3px; }
+@keyframes wave { from { transform: translateX(0); } to { transform: translateX(-50px); } }
+
 .loader__title {
-  position: relative; display: inline-block;
-  font-size: clamp(3rem, 12vw, 5.5rem); font-weight: 900; letter-spacing: .1em; line-height: 1.2;
-  color: transparent; -webkit-text-stroke: 1px var(--color-gold);
+  font-size: clamp(2rem, 8vw, 3rem); font-weight: 900; letter-spacing: .15em; line-height: 1.3;
+  color: #fff; text-shadow: 0 0 18px rgba(212, 33, 61, .6);
 }
-.loader__title::after {
-  content: attr(data-text); position: absolute; inset: 0;
-  color: var(--color-blood-light); -webkit-text-stroke: 0;
-  text-shadow: 0 0 20px rgba(212, 33, 61, .6);
-  clip-path: inset(100% 0 0 0);
-  animation: blood-fill 1.8s cubic-bezier(.5, 0, .3, 1) .2s forwards;
-}
-@keyframes blood-fill { to { clip-path: inset(0 0 0 0); } }
-
 .loader__sub {
-  margin-top: 6px; font-weight: 600; letter-spacing: .4em; color: var(--color-gold);
-  opacity: 0; animation: fade-in .8s .9s forwards;
+  margin-top: 2px; font-weight: 600; letter-spacing: .4em; color: var(--color-gold);
 }
-@keyframes fade-in { to { opacity: 1; } }
-
-.loader__bar {
-  width: 160px; height: 1px; margin: 22px auto 0;
-  background: rgba(201, 162, 74, .25); overflow: hidden;
+.loader__percent {
+  margin-top: 10px; font-family: var(--font-en); font-size: .8rem; letter-spacing: .2em;
+  color: var(--color-blood-light);
 }
-.loader__bar span {
-  display: block; height: 100%; width: 100%;
-  background: var(--color-blood-light); box-shadow: 0 0 8px var(--color-blood-light);
-  transform: scaleX(0); transform-origin: left;
-  animation: bar-fill 2s ease-out forwards;
-}
-@keyframes bar-fill { to { transform: scaleX(1); } }
 
 /* 黑幕拉開後，主視覺文字依序浮現 */
 .hero__inner > * { transition: opacity 1s, transform 1s; }
@@ -367,28 +372,42 @@ body.is-loading .hero__inner > * { opacity: 0; transform: translateY(24px); }
 .card h3 { margin-bottom: 8px; color: var(--color-gold); letter-spacing: .08em; }
 .card p { color: var(--color-text-sub); font-size: .95rem; }
 
-/* ---------- 時程 ---------- */
-.timeline { list-style: none; max-width: 640px; margin-inline: auto; position: relative; }
-.timeline::before {
-  content: ""; position: absolute; left: 70px; top: 8px; bottom: 8px;
-  width: 1px; background: linear-gradient(180deg, var(--color-gold), rgba(201, 162, 74, .1));
+/* ---------- 當天活動資訊 ---------- */
+.event {
+  display: grid; grid-template-columns: 3fr 2fr; gap: 32px;
+  max-width: 960px; margin-inline: auto;
 }
-.timeline__item {
-  display: grid; grid-template-columns: 70px 1fr; gap: 32px;
-  position: relative; padding-bottom: 40px;
+.event__info, .event__timetable {
+  background: var(--color-card);
+  border: 1px solid rgba(201, 162, 74, .3);
+  padding: 12px 32px;
 }
-/* 節點：菱形 */
-.timeline__item::before {
-  content: ""; position: absolute; left: 64px; top: 9px;
-  width: 13px; height: 13px; transform: rotate(45deg);
-  background: var(--color-bg); border: 1px solid var(--color-gold);
+.event__info > div {
+  display: grid; grid-template-columns: 80px 1fr; gap: 16px;
+  padding: 18px 0; border-bottom: 1px solid rgba(201, 162, 74, .15);
 }
-.timeline__item time { font-family: var(--font-en); font-weight: 700; color: var(--color-text-sub); }
-.timeline__item h3 { font-size: 1.1rem; }
-.timeline__item p { color: var(--color-text-sub); font-size: .95rem; }
-.timeline__item.is-past::before { background: var(--color-blood-light); border-color: var(--color-blood-light); }
-.timeline__item.is-past time { color: var(--color-blood-light); }
-.timeline__item.is-current::before { box-shadow: 0 0 14px 4px rgba(212, 33, 61, .6); }
+.event__info > div:last-child { border-bottom: 0; }
+.event__info dt { color: var(--color-gold); font-weight: 600; letter-spacing: .15em; }
+.event__info a { color: var(--color-blood-light); }
+
+.event__timetable { padding: 28px 32px; }
+.event__timetable h3 {
+  font-family: var(--font-title); color: var(--color-blood-light);
+  letter-spacing: .15em; margin-bottom: 12px;
+}
+.event__timetable ol { list-style: none; }
+.event__timetable li {
+  display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: baseline;
+  padding: 12px 0; border-bottom: 1px dashed rgba(201, 162, 74, .2);
+}
+.event__timetable li:last-child { border-bottom: 0; }
+.event__timetable time { font-family: var(--font-en); font-weight: 700; color: var(--color-gold); }
+
+@media (max-width: 720px) {
+  .event { grid-template-columns: 1fr; gap: 20px; }
+  .event__info, .event__timetable { padding-inline: 20px; }
+  .event__info > div { grid-template-columns: 64px 1fr; }
+}
 
 /* ---------- 參加方式 ---------- */
 .join { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
