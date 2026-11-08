@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鬼塚湊 2026生誕祭</title>
+  <meta name="description" content="鬼塚湊 2026生誕祭｜2026.12.11 吸血鬼的誕生之夜">
+
+  <!-- 分享到社群時顯示的資訊（圖片放好後改路徑） -->
+  <meta property="og:title" content="鬼塚湊 2026生誕祭">
+  <meta property="og:description" content="2026.12.11 吸血鬼的誕生之夜，誠摯邀請你出席。">
+  <meta property="og:image" content="img/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;700&family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-loading">
+
+  <!-- ===== 載入動畫 ===== -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <svg class="loader__bat" viewBox="0 0 100 44" fill="currentColor"><path d="M50 14c-2-5-5-6-7-3-5-8-18-11-30-6 7 2 9 8 7 14 6-4 13-2 15 4 4-4 10-2 12 4l3 9 3-9c2-6 8-8 12-4 2-6 9-8 15-4-2-6 0-12 7-14-12-5-25-2-30 6-2-3-5-2-7 3z"/></svg>
+      <p class="loader__title" data-text="鬼塚湊">鬼塚湊</p>
+      <p class="loader__sub">2026生誕祭</p>
+      <div class="loader__bar"><span></span></div>
+    </div>
+  </div>
+
+  <!-- ===== 導覽列 ===== -->
+  <header class="nav">
+    <a href="#top" class="nav__logo">MINATO <span>2026</span></a>
+    <button class="nav__toggle" aria-label="開啟選單" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav__menu">
+      <a href="#about">企劃介紹</a>
+      <a href="#support">應援內容</a>
+      <a href="#schedule">時程</a>
+      <a href="#join">參加方式</a>
+      <a href="#messages">留言牆</a>
+      <a href="#faq">Q&amp;A</a>
+    </nav>
+  </header>
+
+  <!-- ===== 主視覺 ===== -->
+  <section class="hero" id="top">
+    <div class="hero__bats" aria-hidden="true"></div>
+    <div class="hero__embers" aria-hidden="true"></div>
+
+    <div class="hero__inner">
+      <p class="hero__eyebrow">✠ The Night of Crimson Moon ✠</p>
+      <h1 class="hero__name">鬼塚湊</h1>
+      <p class="hero__subtitle">2026生誕祭</p>
+      <p class="hero__date">2026.12.11 <span>FRI</span></p>
+
+      <p class="countdown__label">吸血鬼甦醒之時，倒數</p>
+      <div class="countdown" id="countdown">
+        <div class="countdown__item"><span id="cd-days">00</span><small>DAYS</small></div>
+        <div class="countdown__item"><span id="cd-hours">00</span><small>HOURS</small></div>
+        <div class="countdown__item"><span id="cd-mins">00</span><small>MIN</small></div>
+        <div class="countdown__item"><span id="cd-secs">00</span><small>SEC</small></div>
+      </div>
+      <p class="countdown__done" id="countdown-done" hidden></p>
+
+      <a href="#join" class="btn btn--primary">接受邀請</a>
+    </div>
+  </section>
+
+  <!-- ===== 企劃介紹 ===== -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section__title"><span>Invitation</span>致親愛的血眷們</h2>
+      <div class="about">
+        <div class="about__photo">
+          <!-- 網頁用壓縮版 img/minato.jpg（原檔 minato.png 太大不直接使用） -->
+          <img src="img/minato.jpg" alt="鬼塚湊" onerror="this.parentElement.classList.add('is-empty')">
+          <span class="about__placeholder">🦇</span>
+        </div>
+        <div class="about__text">
+          <p class="about__lead">
+            第十二月的第十一夜，血月高掛之時──<br>
+            屬於湊的誕生之宴，即將揭幕。
+          </p>
+          <p>
+            這是一封寄給所有被湊「咬過」的人的邀請函。
+            我們想集合大家的心意，在這一夜為湊獻上最盛大的祝福，
+            讓台下染成一片深紅，讓湊看見我們滿滿的愛。
+          </p>
+          <p>
+            無論你是早已締結契約的老血眷，還是最近才被吸引的新血眷，
+            都誠摯邀請你出席這場夜宴。
+          </p>
+          <p class="about__sign">── 鬼塚湊 2026生誕祭 生誕委員會</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 應援內容 ===== -->
+  <section class="section section--alt" id="support">
+    <div class="container">
+      <h2 class="section__title"><span>Offerings</span>獻給湊的祭品</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="card__icon">🌹</div>
+          <h3>深紅薔薇花籃</h3>
+          <p>集資贈送以紅薔薇為主的吸血鬼風格花籃，擺放於會場入口。</p>
+        </article>
+        <article class="card">
+          <div class="card__icon">🦇</div>
+          <h3>蝙蝠應援小卡</h3>
+          <p>現場發放限定蝙蝠造型應援小卡，數量有限，發完為止。</p>
+        </article>
+        <article class="card">
+          <div class="card__icon">🏰</div>
+          <h3>古堡佈景</h3>
+          <p>將會場佈置成吸血鬼古堡風格，迎接湊的誕生之夜。</p>
+        </article>
+        <article class="card">
+          <div class="card__icon">🎂</div>
+          <h3>深紅生日蛋糕</h3>
+          <p>準備吸血鬼主題的生日蛋糕，當天獻給湊。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 時程 ===== -->
+  <section class="section" id="schedule">
+    <div class="container">
+      <h2 class="section__title"><span>Chronicle</span>夜宴時程</h2>
+      <ol class="timeline">
+        <li class="timeline__item" data-date="2026-11-10">
+          <time>11.10</time>
+          <div><h3>邀請函寄出・開始募集</h3><p>集資表單開放填寫。</p></div>
+        </li>
+        <li class="timeline__item" data-date="2026-11-30">
+          <time>11.30</time>
+          <div><h3>集資截止</h3><p>花籃、小卡、佈景與蛋糕開始籌備。</p></div>
+        </li>
+        <li class="timeline__item" data-date="2026-12-11">
+          <time>12.11</time>
+          <div><h3>血月之夜・生誕當日 🦇</h3><p>古堡佈景登場，花籃與蛋糕獻給湊。</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== 參加方式 ===== -->
+  <section class="section section--alt" id="join">
+    <div class="container">
+      <h2 class="section__title"><span>The Pact</span>締結契約</h2>
+      <!-- 售票網址在 js/main.js 的 CONFIG.forms 設定（ticketN / ticketS） -->
+      <div class="join join--tickets">
+        <div class="join__step">
+          <span class="join__num">N</span>
+          <h3>N票</h3>
+          <a href="#" class="btn btn--primary js-form-link" data-form="ticketN" data-pending="售票準備中，敬請期待！" target="_blank" rel="noopener">購買 N票</a>
+        </div>
+        <div class="join__step">
+          <span class="join__num">S</span>
+          <h3>S票</h3>
+          <a href="#" class="btn btn--primary js-form-link" data-form="ticketS" data-pending="售票準備中，敬請期待！" target="_blank" rel="noopener">購買 S票</a>
+        </div>
+      </div>
+      <div class="join__buttons">
+        <!-- 表單網址在 js/main.js 的 CONFIG.forms 設定 -->
+        <a href="#" class="btn btn--primary js-form-link" data-form="fund" target="_blank" rel="noopener">參加集資</a>
+        <a href="#" class="btn btn--outline js-form-link" data-form="message" target="_blank" rel="noopener">留言給湊</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 留言牆 ===== -->
+  <section class="section" id="messages">
+    <div class="container">
+      <h2 class="section__title"><span>Letters</span>血眷們的祝福</h2>
+      <p class="section__lead">寫給湊的話（節錄）</p>
+      <div class="messages" id="message-wall"></div>
+    </div>
+  </section>
+
+  <!-- ===== Q&A ===== -->
+  <section class="section section--alt" id="faq">
+    <div class="container container--narrow">
+      <h2 class="section__title"><span>Q &amp; A</span>常見問題</h2>
+      <details class="faq">
+        <summary>沒有去現場也可以參加嗎？</summary>
+        <p>可以！集資可以線上參加，也歡迎透過留言表單寫下祝福，精選留言會刊登在留言牆上。</p>
+      </details>
+      <details class="faq">
+        <summary>集資金額有限制嗎？</summary>
+        <p>沒有限制，心意最重要。集資明細會在活動結束後公開。</p>
+      </details>
+      <details class="faq">
+        <summary>當天有服裝規定嗎？</summary>
+        <p>沒有強制規定，但歡迎穿黑色或深紅色系服裝，一起營造吸血鬼之夜的氣氛！</p>
+      </details>
+      <details class="faq">
+        <summary>有問題要聯絡誰？</summary>
+        <p>請私訊生委的 Instagram <a href="https://www.instagram.com/itazura_piero_/" target="_blank" rel="noopener">@itazura_piero_</a>，我們會盡快回覆。</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===== 頁尾 ===== -->
+  <footer class="footer">
+    <p class="footer__title">鬼塚湊 2026生誕祭</p>
+    <p>
+      生委：<a href="https://www.instagram.com/itazura_piero_/" target="_blank" rel="noopener">Instagram @itazura_piero_</a>
+    </p>
+    <p class="footer__note">本網站為血眷自發企劃，與官方無關。</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
