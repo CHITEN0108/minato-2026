@@ -208,21 +208,49 @@ body.is-loading .hero__inner > * { opacity: 0; transform: translateY(24px); }
   font-family: var(--font-en); font-weight: 700; letter-spacing: .3em;
   font-size: clamp(.7rem, 2vw, .95rem); color: var(--color-gold);
 }
-.hero__name {
-  font-size: clamp(4rem, 16vw, 9rem); font-weight: 900; line-height: 1.15;
-  margin-top: 16px; letter-spacing: .08em;
-  background: linear-gradient(180deg, #fff 10%, #f0c6cc 45%, var(--color-blood-light) 75%, var(--color-blood));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  filter: drop-shadow(0 0 24px rgba(212, 33, 61, .55));
+/* ===== 主標題排版（參考官方宣傳圖） ===== */
+:root {
+  --font-mincho: "Shippori Mincho B1", "Noto Serif TC", serif;
+  --color-silver: #e8d5cf; /* 宣傳圖標題的香檳銀 */
 }
-.hero__subtitle {
-  font-weight: 900; letter-spacing: .3em; margin-top: 4px;
-  font-size: clamp(1.4rem, 5vw, 2.4rem); color: var(--color-gold);
-  text-shadow: 0 0 18px rgba(201, 162, 74, .35);
+/* 上方：鬼塚湊　生誕祭 */
+.hero__host {
+  font-family: var(--font-mincho); font-weight: 500;
+  font-size: clamp(1.1rem, 3.6vw, 1.7rem); letter-spacing: .45em; text-indent: .45em;
+  color: var(--color-silver); margin-top: 18px;
+  text-shadow: 0 0 12px rgba(0, 0, 0, .8);
+}
+/* 十字架＋紅寶石分隔線 */
+.ornament {
+  display: block; width: min(320px, 80%); height: 24px; margin: 10px auto;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 24'%3E%3Cdefs%3E%3ClinearGradient id='l' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23e8d5cf' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23e8d5cf'/%3E%3C/linearGradient%3E%3ClinearGradient id='r' x1='1' x2='0'%3E%3Cstop offset='0' stop-color='%23e8d5cf' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23e8d5cf'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='6' y='11.5' width='134' height='1' fill='url(%23l)'/%3E%3Crect x='180' y='11.5' width='134' height='1' fill='url(%23r)'/%3E%3Ccircle cx='142' cy='12' r='1.6' fill='%23e8d5cf'/%3E%3Ccircle cx='178' cy='12' r='1.6' fill='%23e8d5cf'/%3E%3Cpath d='M160 0v24M146 12h28' stroke='%23e8d5cf' stroke-width='1'/%3E%3Cpath d='M160 4.5l5.5 7.5-5.5 7.5-5.5-7.5z' fill='%23d4213d' stroke='%23e8d5cf' stroke-width='1'/%3E%3C/svg%3E") center / contain no-repeat;
+  filter: drop-shadow(0 0 6px rgba(212, 33, 61, .6));
+}
+/* 大標題：月蝕（血紅金屬）＋に口づけ（香檳銀金屬） */
+.hero__title {
+  font-family: var(--font-mincho); font-weight: 800;
+  font-size: clamp(3rem, 13vw, 7.5rem); line-height: 1.15; letter-spacing: .04em;
+  margin: 14px 0 4px;
+  filter: drop-shadow(0 0 18px rgba(212, 33, 61, .55)) drop-shadow(0 4px 2px rgba(0, 0, 0, .8));
+}
+.hero__title span { -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero__title-red {
+  background-image: linear-gradient(180deg, #ff9a9a 0%, #e0263f 38%, #7a0715 62%, #d4213d 82%, #ff6b7d 100%);
+}
+.hero__title-silver {
+  font-size: .82em; /* 假名比漢字略小，跟宣傳圖一樣 */
+  background-image: linear-gradient(180deg, #ffffff 0%, #f3e3de 35%, #9c8682 58%, #e8d5cf 80%, #fff6f3 100%);
+}
+/* 副標題：月夜に捧ぐ血の契り */
+.hero__tagline {
+  font-family: var(--font-mincho); font-weight: 500;
+  font-size: clamp(1rem, 3.4vw, 1.6rem); letter-spacing: .5em; text-indent: .5em;
+  color: var(--color-silver);
+  text-shadow: 0 0 14px rgba(212, 33, 61, .5), 0 2px 4px rgba(0, 0, 0, .9);
 }
 .hero__date {
-  font-family: var(--font-en); font-weight: 700;
-  font-size: clamp(1.8rem, 6vw, 3rem); margin-top: 28px; letter-spacing: .1em;
+  font-family: var(--font-en); font-weight: 700; color: var(--color-silver);
+  font-size: clamp(1.6rem, 5.5vw, 2.6rem); margin-top: 12px; letter-spacing: .1em;
 }
 .hero__date span { font-size: .45em; color: var(--color-blood-light); vertical-align: middle; }
 
@@ -420,9 +448,49 @@ body.is-loading .hero__inner > * { opacity: 0; transform: translateY(24px); }
   color: var(--color-blood-light); line-height: 1;
 }
 .join__step h3 { margin: 14px 0 6px; color: var(--color-gold); }
-.join--tickets { grid-template-columns: repeat(2, 1fr); max-width: 760px; margin-inline: auto; }
-.join--tickets .join__step h3 { font-size: 1.4rem; margin-bottom: 20px; }
+.join--tickets { grid-template-columns: repeat(2, 1fr); max-width: 860px; margin-inline: auto; }
+.join--tickets .join__step h3 { font-size: 1.4rem; margin-bottom: 4px; }
 .join__step p { color: var(--color-text-sub); font-size: .95rem; }
+
+/* 票券卡片 */
+.ticket {
+  position: relative; display: flex; flex-direction: column; align-items: center;
+  padding: 40px 28px 32px;
+}
+.ticket--s {
+  border: 1px solid var(--color-gold); border-top: 2px solid var(--color-gold);
+  box-shadow: 0 0 40px rgba(201, 162, 74, .15);
+}
+.ticket--s .join__num { color: var(--color-gold); }
+.ticket__badge {
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  background: linear-gradient(180deg, var(--color-blood-light), var(--color-blood));
+  color: #fff; font-size: .8rem; font-weight: 600; letter-spacing: .1em;
+  padding: 3px 14px; border: 1px solid var(--color-gold); white-space: nowrap;
+}
+.join__step .ticket__price {
+  font-family: var(--font-en); font-weight: 700; font-size: 1.9rem; color: #fff;
+  line-height: 1.3; margin-bottom: 20px;
+}
+.ticket__price small {
+  display: block; font-size: .85rem; color: var(--color-text-sub); letter-spacing: .05em;
+}
+.ticket__perks {
+  list-style: none; text-align: left; width: 100%;
+  border-top: 1px solid rgba(201, 162, 74, .2); padding-top: 16px; margin-bottom: 28px;
+  flex: 1; /* 讓兩張卡片的按鈕對齊底部 */
+}
+.ticket__perks li {
+  position: relative; padding: 5px 0 5px 20px; font-size: .93rem; color: var(--color-text);
+}
+.ticket__perks li::before {
+  content: "▸"; position: absolute; left: 0; color: var(--color-blood-light);
+}
+.ticket__perks strong { color: var(--color-gold); font-weight: 600; }
+
+/* 出演者清單 */
+.event__lineup { list-style: none; }
+.event__lineup li + li { margin-top: 2px; }
 .join__buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 52px; }
 
 @media (max-width: 720px) { .join { grid-template-columns: 1fr; } }

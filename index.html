@@ -15,9 +15,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;700&family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;700&family=Noto+Serif+TC:wght@400;600;900&family=Shippori+Mincho+B1:wght@500;800&display=swap" rel="stylesheet">
   <!-- ?v= 是版本號：每次改了 CSS / JS 上傳時，把數字 +1，瀏覽器才會抓新檔 -->
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body class="is-loading">
 
@@ -76,8 +76,13 @@
 
     <div class="hero__inner">
       <p class="hero__eyebrow">✠ The Night of Crimson Moon ✠</p>
-      <h1 class="hero__name">鬼塚湊</h1>
-      <p class="hero__subtitle">2026生誕祭</p>
+      <p class="hero__host">鬼塚湊　生誕祭</p>
+      <span class="ornament" aria-hidden="true"></span>
+      <h1 class="hero__title">
+        <span class="hero__title-red">月蝕</span><span class="hero__title-silver">に口づけ</span>
+      </h1>
+      <p class="hero__tagline">月夜に捧ぐ血の契り</p>
+      <span class="ornament" aria-hidden="true"></span>
       <p class="hero__date">2026.12.11 <span>FRI</span></p>
 
       <p class="countdown__label">吸血鬼甦醒之時，倒數</p>
@@ -114,7 +119,7 @@
             讓台下染成一片深紅，讓みなと様看見我們滿滿的愛。
           </p>
           <p>
-            無論你是早已締結契約的老血眷，還是最近才被吸引的新血眷，
+            無論你是早已締結契約的古参血眷，還是最近才被吸引的新血眷，
             都誠摯邀請你出席這場夜宴。
           </p>
           <p class="about__sign">── 鬼塚湊 2026生誕祭 生誕委員會</p>
@@ -136,26 +141,33 @@
             <dd>2026.12.11（五）</dd>
           </div>
           <div>
+            <dt>時間</dt>
+            <dd>OPEN 18:00 ／ START 18:30</dd>
+          </div>
+          <div>
             <dt>會場</dt>
             <dd>杰克音樂 Jack's studio</dd>
           </div>
           <div>
-            <dt>時間</dt>
-            <dd>OPEN 待公布 ／ START 待公布</dd>
+            <dt>出演嘉賓</dt>
+            <dd>
+              <ul class="event__lineup">
+                <li>悪戯ピエロ</li>
+                <li>LaCrima effim. 儚淚。</li>
+                <li>未確認感情体</li>
+                <li>SETXUNA。</li>
+              </ul>
+            </dd>
           </div>
           <div>
             <dt>票種</dt>
-            <dd>N票・S票（詳見 <a href="#join">購票</a>）</dd>
-          </div>
-          <div>
-            <dt>嘉賓</dt>
-            <dd>待公布</dd>
+            <dd>S Ticket 套組 $2500（限量25名）<br>N Ticket 預購 $600／現場 $800<br><a href="#join">→ 票券詳情・購票</a></dd>
           </div>
         </dl>
 
         <!-- 演出時間表：一列一個節目，複製 <li> 增加 -->
         <div class="event__timetable">
-          <h3>Timetable</h3>
+          <h3>Time List</h3>
           <ol>
             <li><time>--:--</time><span>演出時間表 待公布</span></li>
             <!--
@@ -177,8 +189,8 @@
       <div class="cards">
         <article class="card">
           <div class="card__icon">🌹</div>
-          <h3>深紅薔薇花籃</h3>
-          <p>集資贈送以紅薔薇為主的吸血鬼風格花籃，擺放於會場入口。</p>
+          <h3>深紅薔薇花束</h3>
+          <p>以紅薔薇為主的吸血鬼風格花束。</p>
         </article>
         <article class="card">
           <div class="card__icon">🧛</div>
@@ -192,7 +204,7 @@
         </article>
         <article class="card">
           <div class="card__icon">🎂</div>
-          <h3>深紅生日蛋糕</h3>
+          <h3>生日蛋糕</h3>
           <p>準備吸血鬼主題的生日蛋糕，當天獻給みなと様。</p>
         </article>
         <article class="card">
@@ -210,15 +222,32 @@
       <h2 class="section__title"><span>The Pact</span>締結契約</h2>
       <!-- 售票網址在 js/main.js 的 CONFIG.forms 設定（ticketN / ticketS） -->
       <div class="join join--tickets">
-        <div class="join__step">
-          <span class="join__num">N</span>
-          <h3>N票</h3>
-          <a href="#" class="btn btn--primary js-form-link" data-form="ticketN" data-pending="售票準備中，敬請期待！" target="_blank" rel="noopener">購買 N票</a>
-        </div>
-        <div class="join__step">
+        <div class="join__step ticket ticket--s">
+          <span class="ticket__badge">限量 25 名</span>
           <span class="join__num">S</span>
-          <h3>S票</h3>
-          <a href="#" class="btn btn--primary js-form-link" data-form="ticketS" data-pending="售票準備中，敬請期待！" target="_blank" rel="noopener">購買 S票</a>
+          <h3>S Ticket 套組</h3>
+          <p class="ticket__price">$2500</p>
+          <ul class="ticket__perks">
+            <li>包含一般入場門票</li>
+            <li>入場／物販／特典會第一順位優先</li>
+            <li>鬼塚湊生誕記念證件照 ×1</li>
+            <li>〈月蝕に口づけ〉寬幅獨照拍立得 ×1</li>
+            <li>〈月蝕に口づけ〉紀念票根 ×1</li>
+            <li>〈月蝕に口づけ〉邀請函 ×1</li>
+            <li>拍貼機 off 會抽選權（名額1名）</li>
+          </ul>
+          <a href="#" class="btn btn--primary js-form-link" data-form="ticketS" data-pending="售票準備中，敬請期待！" target="_blank" rel="noopener">購買 S Ticket</a>
+        </div>
+        <div class="join__step ticket">
+          <span class="join__num">N</span>
+          <h3>N Ticket</h3>
+          <p class="ticket__price">預購 $600<small>現場 $800</small></p>
+          <ul class="ticket__perks">
+            <li><strong>預購限定</strong>：ピエロ券 ×2</li>
+            <li>〈月蝕に口づけ〉紀念票根 ×1</li>
+            <li>指名特典</li>
+          </ul>
+          <a href="#" class="btn btn--primary js-form-link" data-form="ticketN" data-pending="售票準備中，敬請期待！" target="_blank" rel="noopener">購買 N Ticket</a>
         </div>
       </div>
       <div class="join__buttons">
@@ -251,6 +280,10 @@
         <p>沒有限制，心意最重要。但請以百為單位，方便後續結算。</p>
       </details>
       <details class="faq">
+        <summary>留言送出後，為什麼沒在網站上看到？</summary>
+        <p>所有留言都會先經過生委確認，審核通過後才會刊登在留言牆上，請耐心等候。審核通過後，最多約 5 分鐘就會出現在網站上；如果還是沒看到，可以重新整理頁面試試。</p>
+      </details>
+      <details class="faq">
         <summary>有問題要聯絡誰？</summary>
         <p>請私訊生委主揪的 Threads <a href="https://www.threads.com/@_x_fufu_x_" target="_blank" rel="noopener">@_x_fufu_x_</a>，或副揪的 Instagram <a href="https://www.instagram.com/rannai_k/" target="_blank" rel="noopener">@rannai_k</a>，我們會盡快回覆。</p>
       </details>
@@ -269,6 +302,6 @@
     <p class="footer__note">本網站為血眷自發企劃，與官方無關。</p>
   </footer>
 
-  <script src="js/main.js?v=7"></script>
+  <script src="js/main.js?v=9"></script>
 </body>
 </html>
