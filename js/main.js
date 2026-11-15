@@ -10,7 +10,7 @@ const CONFIG = {
   forms: {
     fund: "https://forms.gle/Y4ScsrTdaMjVE53x9", // 集資表單
     message: "https://forms.gle/6BLXzoJU3yB9bB5r6", // 留言表單
-    ticketN: "",  // N票 售票網址
+    ticketN: "https://forms.gle/KvWcAvHH93gpxaKe6",  // N票 售票網址
     ticketS: "",  // S票 售票網址
   },
 
